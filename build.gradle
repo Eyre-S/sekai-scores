@@ -1,0 +1,60 @@
+plugins {
+	id 'java'
+	id 'maven-publish'
+}
+
+group 'cc.sukazyo'
+version projVersion
+
+repositories {
+	mavenCentral()
+	maven { name '-ws'; url 'https://mvn.sukazyo.cc/releases' }
+}
+
+dependencies {
+	
+	/** provide javax.annotations.Nonnull annotations etc. */
+	compileOnly "com.github.spotbugs:spotbugs-annotations:${lib_spotbugs_v}"
+	
+	testImplementation "org.junit.jupiter:junit-jupiter-api:${lib_junit_v}"
+	testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${lib_junit_v}"
+	
+}
+
+test {
+	useJUnitPlatform()
+}
+
+java {
+	
+	sourceCompatibility JavaVersion.VERSION_17
+	targetCompatibility JavaVersion.VERSION_17
+	
+	withSourcesJar()
+	
+}
+
+publishing {
+	repositories{
+		maven {
+			name 'builds'
+			url publishLocalArchiveRepoUrl
+		}
+		maven {
+			name '-ws-'
+			url publishMvnRepoUrl
+			credentials {
+				username publishMvnRepoUsername
+				password publishMvnRepoPassword
+			}
+		}
+	}
+	publications {
+		main (MavenPublication) {
+			from components.java
+			groupId = project.group
+			artifactId = project.archivesBaseName
+			version = project.version
+		}
+	}
+}

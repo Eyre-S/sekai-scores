@@ -1,0 +1,3 @@
+rootProject.name = 'sekai-scores'
+include 'sekai-cli'
+
