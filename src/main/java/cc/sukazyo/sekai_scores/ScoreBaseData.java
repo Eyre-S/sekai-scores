@@ -4,7 +4,6 @@ import javax.annotation.CheckForSigned;
 import javax.annotation.Nonnegative;
 
 /**
- * 因为单写完数据感觉就太长了于是把数据模型独立出来了让本来的类里能好好写工具方法.
  * @see ScoreBase
  */
 public class ScoreBaseData {

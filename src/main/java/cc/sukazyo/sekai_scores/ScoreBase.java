@@ -1,7 +1,6 @@
 package cc.sukazyo.sekai_scores;
 
 /**
- * 由于数据定义了好长所以数据定义被独立出来了，看下面的引用.
  * @see ScoreBaseData
  */
 public class ScoreBase extends ScoreBaseData {
