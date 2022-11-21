@@ -2,6 +2,7 @@ package cc.sukazyo.sekai_scores;
 
 import javax.annotation.CheckForSigned;
 import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
 
 /**
  * @see ScoreBase
@@ -180,6 +181,19 @@ public class ScoreBaseData {
 	@CheckForSigned
 	public int combo() {
 		return combo;
+	}
+	
+	@Override
+	@Nonnull
+	public String toString() {
+		return String.format(
+				"{\"perfect\":%d,\"great\":%d,\"good\":%d,\"bad\":%d,\"miss\":%d,\"judge\":{\"fast\":%s,\"slow\":%s,\"flick\":%s},\"combo\":%s}",
+				notePerfect, noteGreat, noteGood, noteBad, noteMiss,
+				judgeFast==NULL ? "null" : judgeFast,
+				judgeSlow==NULL ? "null" : judgeFast,
+				judgeFlick==NULL ? "null" : judgeFast,
+				combo==NULL ? "null" : combo
+		);
 	}
 	
 }

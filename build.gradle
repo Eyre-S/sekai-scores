@@ -19,6 +19,8 @@ dependencies {
 	testImplementation "org.junit.jupiter:junit-jupiter-api:${lib_junit_v}"
 	testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${lib_junit_v}"
 	
+	testImplementation project(":sekai-scores-db")
+	
 }
 
 final JavaVersion proj_java = JavaVersion.VERSION_17

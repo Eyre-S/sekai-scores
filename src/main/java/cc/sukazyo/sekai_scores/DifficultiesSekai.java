@@ -26,4 +26,17 @@ public record DifficultiesSekai(
 		action.accept(MASTER_NAME, master);
 	}
 	
+	@Override
+	@Nonnull
+	public String toString() {
+		return String.format(
+				"[{\"id\":\"%s\",%s},{\"id\":\"%s\",%s},{\"id\":\"%s\",%s},{\"id\":\"%s\",%s},{\"id\":\"%s\",%s}]",
+				EASY_NAME, easy.toStringSimple(),
+				NORMAL_NAME, normal.toStringSimple(),
+				HARD_NAME, hard.toStringSimple(),
+				EXPERT_NAME, expert.toStringSimple(),
+				MASTER_NAME, master.toStringSimple()
+		);
+	}
+	
 }

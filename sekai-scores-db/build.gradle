@@ -1,10 +1,10 @@
+import java.nio.charset.Charset
+import java.nio.charset.StandardCharsets
+
 plugins {
 	id 'java'
 	id 'java-library'
 }
-
-group 'cc.sukazyo'
-version moduleVersion
 
 repositories {
 	mavenCentral()
@@ -19,6 +19,31 @@ dependencies {
 	
 }
 
+final JavaVersion proj_java = JavaVersion.VERSION_17
+final Charset proj_source_encoding = StandardCharsets.UTF_8
+
+group 'cc.sukazyo'
+version moduleVersion
+
 test {
 	useJUnitPlatform()
+}
+
+java {
+	
+	sourceCompatibility proj_java
+	targetCompatibility proj_java
+	
+	withSourcesJar()
+	
+}
+
+tasks.withType(JavaCompile) {
+	options.encoding = proj_source_encoding.name()
+}
+
+tasks.withType(Javadoc) {
+	options.encoding = proj_source_encoding.name()
+	options.docEncoding = proj_source_encoding.name()
+	options.charSet = proj_source_encoding.name()
 }
