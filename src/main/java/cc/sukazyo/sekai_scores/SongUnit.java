@@ -55,7 +55,7 @@ public enum SongUnit {
 	@Nonnull
 	public String toString() {
 		return String.format(
-				"{\"id\":%d,\"fullname\":\"%s\"}",
+				"{\"id\":%d,\"fullname\":%s}",
 				id,
 				Converter.parseJSONString(name)
 		);

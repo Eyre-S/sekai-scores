@@ -1,12 +1,20 @@
 package cc.sukazyo.sekai_scores;
 
+import cc.sukazyo.sekai_scores.util.Converter;
+
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 
 public record Difficulty(
+		@Nonnegative String id,
 		@Nonnegative int level,
 		@Nonnegative int noteCount
 ) {
+	
+	/**
+	 * @since 0.4
+	 */
+	@Nonnull public String id () { return id; }
 	
 	/**
 	 * The difficulty number of this difficulty map.
@@ -37,8 +45,8 @@ public record Difficulty(
 	@Nonnull
 	public String toStringSimple () {
 		return String.format(
-				"\"difficulty\":%d,\"notes\":%d",
-				level, noteCount
+				"\"id\":%s,\"difficulty\":%d,\"notes\":%d",
+				Converter.parseJSONString(id), level, noteCount
 		);
 	}
 	

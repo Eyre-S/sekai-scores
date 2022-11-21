@@ -5,36 +5,41 @@ import cc.sukazyo.sekai_scores.DifficultiesSekai;
 import cc.sukazyo.sekai_scores.Song;
 import cc.sukazyo.sekai_scores.SongUnit;
 
+import static cc.sukazyo.sekai_scores.DifficultiesSekai.*;
+
 public class Nightcord25ji {
 	
+	/** <a href="https://www.sekaipedia.org/wiki/Keitai_Renwa">...</a> */
 	public static final Song Keitai_Renwa = new Song(
-			"携帯恋話", SongUnit.NIGHTCORD_25JI,
+			61, "携帯恋話", SongUnit.NIGHTCORD_25JI,
 			new DifficultiesSekai(
-					new Difficulty( 8,  204),
-					new Difficulty(12,  361),
-					new Difficulty(18,  651),
-					new Difficulty(25,  981),
-					new Difficulty(29, 1131)
+					new Difficulty(  EASY_NAME,  8,  204),
+					new Difficulty(NORMAL_NAME, 12,  361),
+					new Difficulty(  HARD_NAME, 18,  651),
+					new Difficulty(EXPERT_NAME, 25,  981),
+					new Difficulty(MASTER_NAME, 29, 1131)
 			)
 	);
+	/** <a href="https://www.sekaipedia.org/wiki/Kuyamu_to_Kaite_Mirai">...</a> */
 	public static final Song Kuyamu_to_Kaite_Mirai = new Song(
-			"悔やむと書いてミライ", SongUnit.NIGHTCORD_25JI,
+			60, "悔やむと書いてミライ", SongUnit.NIGHTCORD_25JI,
 			new DifficultiesSekai(
-					new Difficulty( 8,  190),
-					new Difficulty(13,  440),
-					new Difficulty(17,  541),
-					new Difficulty(26,  815),
-					new Difficulty(30,  973)
+					new Difficulty(  EASY_NAME, 8,  190),
+					new Difficulty(NORMAL_NAME,13,  440),
+					new Difficulty(  HARD_NAME,17,  541),
+					new Difficulty(EXPERT_NAME,26,  815),
+					new Difficulty(MASTER_NAME,30,  973)
 			)
 	);
+	/** <a href="https://www.sekaipedia.org/wiki/ID_Smile">...</a> */
 	public static final Song ID_SMILE = new Song(
-			"アイディスマイル", SongUnit.NIGHTCORD_25JI,
+			116, "アイディスマイル", SongUnit.NIGHTCORD_25JI,
 			new DifficultiesSekai(
-					new Difficulty( 7,  263),
-					new Difficulty(12,  439),
-					new Difficulty(17,  703),
-					new Difficulty(25,  985),
-					new Difficulty(28, 1247)
+					new Difficulty(  EASY_NAME, 7,  263),
+					new Difficulty(NORMAL_NAME,12,  439),
+					new Difficulty(  HARD_NAME,17,  703),
+					new Difficulty(EXPERT_NAME,25,  985),
+					new Difficulty(MASTER_NAME,28, 1247)
 			)
 	);
 	

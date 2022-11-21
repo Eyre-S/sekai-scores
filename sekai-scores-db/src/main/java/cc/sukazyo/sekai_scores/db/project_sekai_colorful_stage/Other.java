@@ -5,26 +5,31 @@ import cc.sukazyo.sekai_scores.DifficultiesSekai;
 import cc.sukazyo.sekai_scores.Song;
 import cc.sukazyo.sekai_scores.SongUnit;
 
+import static cc.sukazyo.sekai_scores.DifficultiesSekai.*;
+
 public class Other {
 	
+	
+	/** <a href="https://www.sekaipedia.org/wiki/Don%27t_Fight_The_Music">...</a> */
 	public static final Song Dont_Fight_the_Music = new Song(
-			"Don't Fight The Music", SongUnit.OTHER,
+			164, "Don't Fight The Music", SongUnit.OTHER,
 			new DifficultiesSekai(
-					new Difficulty( 9,  520),
-					new Difficulty(15,  701),
-					new Difficulty(23, 1175),
-					new Difficulty(30, 1545),
-					new Difficulty(36, 1888)
+					new Difficulty(  EASY_NAME, 9,  520),
+					new Difficulty(NORMAL_NAME,15,  701),
+					new Difficulty(  HARD_NAME,23, 1175),
+					new Difficulty(EXPERT_NAME,30, 1545),
+					new Difficulty(MASTER_NAME,36, 1888)
 			)
 	);
+	/** <a href="https://www.sekaipedia.org/wiki/Tokugawa_Cup_Noodle_Kinshirei">...</a> */
 	public static final Song Tokugawa_Kappu_Nuudoru_Kinshirei = new Song(
-			"徳川カップヌードル禁止令", SongUnit.OTHER,
+			234, "徳川カップヌードル禁止令", SongUnit.OTHER,
 			new DifficultiesSekai(
-					new Difficulty( 8,  264),
-					new Difficulty(13,  498),
-					new Difficulty(19,  758),
-					new Difficulty(27, 1065),
-					new Difficulty(31, 1241)
+					new Difficulty(  EASY_NAME, 8,  264),
+					new Difficulty(NORMAL_NAME,13,  498),
+					new Difficulty(  HARD_NAME,19,  758),
+					new Difficulty(EXPERT_NAME,27, 1065),
+					new Difficulty(MASTER_NAME,31, 1241)
 			)
 	);
 	

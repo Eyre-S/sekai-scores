@@ -5,6 +5,7 @@ import cc.sukazyo.sekai_scores.util.Converter;
 import javax.annotation.Nonnull;
 
 public record Song(
+		int id,
 		@Nonnull String name,
 		@Nonnull SongUnit unit,
 		@Nonnull Difficulties difficulties
@@ -14,7 +15,8 @@ public record Song(
 	@Nonnull
 	public String toString () {
 		return String.format(
-				"{\"name\":\"%s\",\"unit\":%s,\"difficulties\":%s}",
+				"{\"id\":%d,\"name\":%s,\"unit\":%s,\"difficulties\":%s}",
+				id,
 				Converter.parseJSONString(name),
 				unit,
 				difficulties

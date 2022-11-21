@@ -1,7 +1,7 @@
 package cc.sukazyo.sekai_scores;
 
 import javax.annotation.Nonnull;
-import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public record DifficultiesSekai(
 		@Nonnull Difficulty easy,
@@ -18,24 +18,20 @@ public record DifficultiesSekai(
 	public static final String MASTER_NAME = "MASTER";
 	
 	@Override
-	public void forEach (@Nonnull BiConsumer<String, Difficulty> action) {
-		action.accept(EASY_NAME, easy);
-		action.accept(NORMAL_NAME, normal);
-		action.accept(HARD_NAME, hard);
-		action.accept(EXPERT_NAME, expert);
-		action.accept(MASTER_NAME, master);
+	public void forEach (@Nonnull Consumer<Difficulty> action) {
+		action.accept(easy);
+		action.accept(normal);
+		action.accept(hard);
+		action.accept(expert);
+		action.accept(master);
 	}
 	
 	@Override
 	@Nonnull
 	public String toString() {
 		return String.format(
-				"[{\"id\":\"%s\",%s},{\"id\":\"%s\",%s},{\"id\":\"%s\",%s},{\"id\":\"%s\",%s},{\"id\":\"%s\",%s}]",
-				EASY_NAME, easy.toStringSimple(),
-				NORMAL_NAME, normal.toStringSimple(),
-				HARD_NAME, hard.toStringSimple(),
-				EXPERT_NAME, expert.toStringSimple(),
-				MASTER_NAME, master.toStringSimple()
+				"[%s,%s,%s,%s,%s]",
+				easy,normal,hard,expert,master
 		);
 	}
 	
