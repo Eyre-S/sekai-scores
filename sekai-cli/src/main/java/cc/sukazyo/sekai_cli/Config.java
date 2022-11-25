@@ -4,12 +4,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
 
 import static cc.sukazyo.sekai_cli.Log._debug;
+import static cc.sukazyo.sekai_cli.Log._user;
 
 public class Config {
 	
@@ -46,29 +48,98 @@ public class Config {
 		return v;
 	}
 	
-	static Config loadUserConfig() {
-		try {
-			
-			final Properties props = new Properties();
-			final File propFile = Paths.get(getAppConfigPath(getSysUserConfigRoot()).toString(), CONFIG_FILE).toFile();
-			props.load(new FileInputStream(propFile));
-			_debug("loaded config file: " + propFile.getAbsolutePath());
-			
-			return new Config(props);
-			
-		} catch (IOException e) {
-			throw new RuntimeException("error while load user config", e);
-		}
+	public void echo() {
+		echo("user.sekai-id", String.valueOf(sekai_id));
+		echo("db.server", db_host);
+		echo("db.database", db_name);
+		echo("db.auth.user", db_auth_user);
+		echo("db.auth.password", db_auth_pwd);
+		echo("db.table-prefix", db_prefix);
 	}
 	
-	private static Path getAppConfigPath(Path configRoot) {
+	private void echo (String k, String v) {
+		if (v == null) System.out.println(k + " [unset]");
+		System.out.println(k + " = " + v);
+	}
+	
+	static Config load() {
+		
+		final Properties props = new Properties();
+		final File propFileSys = getAppConfigFile(getAppConfigPath(getSysGlobalConfigRoot()));
+		final File propFileUser = getAppConfigFile(getAppConfigPath(getSysUserConfigRoot()));
+		
+		final boolean propSysLoaded = load(props, propFileSys);
+		final boolean propUserLoaded = load(props, propFileUser);
+		if (!propUserLoaded && !propSysLoaded) {
+			_user("no config available.\n  use `$ sekai-cli config create | edit` to create a config file and edit it.");
+			return null;
+		}
+		
+		return new Config(props);
+		
+	}
+	
+	private static boolean load (Properties target, File file) {
+		try {
+			target.load(new FileInputStream(file));
+		} catch (FileNotFoundException e) {
+			_debug("config not created yet: " + file.getAbsolutePath());
+			_debug(e);
+			return false;
+		} catch (SecurityException e) {
+			_debug("reading config: " + file.getAbsolutePath() + ": permission denied");
+			_debug(e);
+			return false;
+		} catch (IOException e) {
+			_debug("failed read config: " + file.getAbsolutePath());
+			_debug(e);
+			return false;
+		}
+		_debug("loaded config file: " + file.getAbsolutePath());
+		return true;
+	}
+	
+	public static File getAppConfigFile (Path appConfigPath) {
+		return Paths.get(appConfigPath.toString(), CONFIG_FILE).toFile();
+	}
+	
+	public static Path getAppConfigPath(Path configRoot) {
 		return Paths.get(configRoot.toString(), CONFIG_ROOT_NAME);
 	}
 	
-	private static Path getSysUserConfigRoot () {
-		final Path userhome = Paths.get(System.getProperty("user.home"), ".config");
-		_debug("read config from user home : " + userhome.toAbsolutePath());
+	public static Path getSysUserConfigRoot () {
+		final Path userhome = Paths.get(System.getProperty("user.home"), SysType.get().userConfigPath);
+		_debug("read config from user home config : " + userhome.toAbsolutePath());
 		return userhome;
+	}
+	
+	public static Path getSysGlobalConfigRoot () {
+		final Path syshome = Paths.get(File.listRoots()[0].getPath(), SysType.get().sysConfigPath);
+		_debug("read config from system global config : " + syshome.toAbsolutePath());
+		return syshome;
+	}
+	
+	public enum SysType {
+		
+		WINDOWS(new String[]{"AppData", "Roaming"}, new String[]{"ProgramData"}),
+//		LINUX(userConfigPath, sysConfigPath),
+//		MACOS(userConfigPath, sysConfigPath),
+		UNKNOWN(new String[]{".config"}, new String[]{"etc"});
+		
+		public final String[] userConfigPath;
+		public final String[] sysConfigPath;
+		
+		SysType (String[] userConfigPath, String[] sysConfigPath) {
+			this.userConfigPath = userConfigPath;
+			this.sysConfigPath = sysConfigPath;
+		}
+		
+		public static SysType get () {
+			final String sysName = System.getProperty("os.name");
+			if (sysName.contains("Windows")) return SysType.WINDOWS;
+			return UNKNOWN;
+		}
+		
 	}
 	
 }

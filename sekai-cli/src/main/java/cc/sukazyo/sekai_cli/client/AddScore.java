@@ -2,8 +2,6 @@ package cc.sukazyo.sekai_cli.client;
 
 import cc.sukazyo.sekai_scores.ScoreBase;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -44,11 +42,10 @@ public class AddScore {
 			
 		} catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
 			System.out.println("unsupported yet.");
-			final StringWriter sw = new StringWriter();
-			e.printStackTrace(new PrintWriter(sw));
-			_debug(sw.toString());
+			_debug(e);
 		} catch (InputMismatchException e) {
 			System.out.println("unavailable input: " + e.getMessage());
+			_debug(e);
 		}
 		
 	}

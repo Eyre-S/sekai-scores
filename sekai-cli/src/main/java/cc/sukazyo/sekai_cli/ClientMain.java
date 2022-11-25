@@ -1,18 +1,38 @@
 package cc.sukazyo.sekai_cli;
 
 import cc.sukazyo.sekai_cli.client.AddScore;
+import cc.sukazyo.sekai_cli.client.Configs;
 
-import java.util.Arrays;
+import java.util.List;
+
+import static cc.sukazyo.sekai_cli.Log._user;
 
 public class ClientMain {
 	
-	public static final Config config = Config.loadUserConfig();
+	private static Config config = null;
+	
+	public static Config config() {
+		if (config == null) config = Config.load();
+		if (config == null) {
+			_user("read config failed.");
+			System.exit(1);
+		}
+		return config;
+	}
 	
 	public static void main (String[] args) {
 		
-		if (args.length > 0) {
-			if (args[0].equals("add")) {
-				AddScore.main(Arrays.copyOfRange(args, 1, args.length));
+		final List<String> $args = new java.util.ArrayList<>(List.of(args));
+		if ($args.remove("--debug")) Log.enableDebugging();
+		if ($args.remove("--verbose")) Log.enableDebugging();
+		
+		if ($args.size() > 0) {
+			final String i0 = $args.remove(0);
+			if (i0.equals("add")) {
+				AddScore.main($args.toArray(String[]::new));
+				$done();
+			} else if (i0.equals("config")) {
+				Configs.main($args.toArray(String[]::new));
 				$done();
 			}
 		}
