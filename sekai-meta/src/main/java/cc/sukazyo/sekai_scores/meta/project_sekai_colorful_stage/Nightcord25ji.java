@@ -1,4 +1,4 @@
-package cc.sukazyo.sekai_scores.db.project_sekai_colorful_stage;
+package cc.sukazyo.sekai_scores.meta.project_sekai_colorful_stage;
 
 import cc.sukazyo.sekai_scores.Difficulty;
 import cc.sukazyo.sekai_scores.DifficultiesSekai;
@@ -7,7 +7,7 @@ import cc.sukazyo.sekai_scores.SongUnit;
 
 import static cc.sukazyo.sekai_scores.DifficultiesSekai.*;
 
-public class Nightcord25ji {
+public class Nightcord25ji extends SongDefinition {
 	
 	/** <a href="https://www.sekaipedia.org/wiki/Kuyamu_to_Kaite_Mirai">...</a> */
 	public static final Song Kuyamu_to_Kaite_Mirai = new Song(
@@ -32,7 +32,7 @@ public class Nightcord25ji {
 			)
 	);
 	/** <a href="https://www.sekaipedia.org/wiki/ID_Smile">...</a> */
-	public static final Song ID_SMILE = new Song(
+	public static final Song ID_Smile = new Song(
 			116, "アイディスマイル", SongUnit.NIGHTCORD_25JI,
 			new DifficultiesSekai(
 					new Difficulty(  EASY_NAME, 7,  263),

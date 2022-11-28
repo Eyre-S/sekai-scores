@@ -5,6 +5,8 @@ import java.util.function.Consumer;
 
 public interface Difficulties {
 	
+	Difficulty[] getAll ();
+	
 	void forEach(@Nonnull Consumer<Difficulty> action);
 	
 }

@@ -18,6 +18,11 @@ public record DifficultiesSekai(
 	public static final String MASTER_NAME = "MASTER";
 	
 	@Override
+	public Difficulty[] getAll () {
+		return new Difficulty[]{easy, normal, hard, expert, master};
+	}
+	
+	@Override
 	public void forEach (@Nonnull Consumer<Difficulty> action) {
 		action.accept(easy);
 		action.accept(normal);

@@ -1,4 +1,4 @@
-package cc.sukazyo.sekai_scores.db.project_sekai_colorful_stage;
+package cc.sukazyo.sekai_scores.meta.project_sekai_colorful_stage;
 
 import cc.sukazyo.sekai_scores.Difficulty;
 import cc.sukazyo.sekai_scores.DifficultiesSekai;
@@ -7,7 +7,7 @@ import cc.sukazyo.sekai_scores.SongUnit;
 
 import static cc.sukazyo.sekai_scores.DifficultiesSekai.*;
 
-public class SekaiSpecial {
+public class SekaiSpecial extends SongDefinition {
 	
 	/** <a href="https://www.sekaipedia.org/wiki/Yoru_ni_Kakeru">...</a> */
 	public static final Song Yoru_ni_Kakeru = new Song(

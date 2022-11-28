@@ -1,4 +1,4 @@
-package cc.sukazyo.sekai_scores.db.project_sekai_colorful_stage;
+package cc.sukazyo.sekai_scores.meta.project_sekai_colorful_stage;
 
 import cc.sukazyo.sekai_scores.Difficulty;
 import cc.sukazyo.sekai_scores.DifficultiesSekai;
@@ -7,7 +7,7 @@ import cc.sukazyo.sekai_scores.SongUnit;
 
 import static cc.sukazyo.sekai_scores.DifficultiesSekai.*;
 
-public class Other {
+public class Other extends SongDefinition {
 	
 	
 	/** <a href="https://www.sekaipedia.org/wiki/Don%27t_Fight_The_Music">...</a> */

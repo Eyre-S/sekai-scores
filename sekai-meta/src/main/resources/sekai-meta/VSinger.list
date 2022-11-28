@@ -1,0 +1,17 @@
+
+[Tell_Your_World]
+id=1
+title=Tell Your World
+producer=kz
+arranger=kz
+composer=kz
+lyricist=kz
+commissioned=false
+bpm=150
+duration=2:03.3
+released_date=2019-06-10
+difficulty.easy=5;220
+difficulty.normal=10;492
+difficulty.hard=16;719
+difficulty.expert=22;961
+difficulty.master=26;1147

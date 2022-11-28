@@ -23,7 +23,7 @@ public class Config {
 	@Nonnull public final String db_name;
 	@Nonnull public final String db_auth_user;
 	@Nonnull public final String db_auth_pwd;
-	@Nullable public final String db_prefix;
+	@Nullable public final String db_schema;
 	
 	private Config (Properties props) {
 		// user config field
@@ -37,8 +37,8 @@ public class Config {
 		_debug("config field db.auth.user set: " + this.db_auth_user);
 		this.db_auth_pwd = getNonnull(props, "db.auth.password");
 		_debug("config field db.auth.password set.");
-		this.db_prefix = props.getProperty("db.table-prefix");
-		_debug(this.db_prefix == null ? "config field db.prefix unset." : "config field db.table-prefix set: " + this.db_prefix);
+		this.db_schema = props.getProperty("db.schema");
+		_debug(this.db_schema == null ? "config field db.schema unset." : "config field db.schema set: " + this.db_schema);
 	}
 	
 	@Nonnull
@@ -54,7 +54,7 @@ public class Config {
 		echo("db.database", db_name);
 		echo("db.auth.user", db_auth_user);
 		echo("db.auth.password", db_auth_pwd);
-		echo("db.table-prefix", db_prefix);
+		echo("db.schema", db_schema);
 	}
 	
 	private void echo (String k, String v) {

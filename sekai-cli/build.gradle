@@ -15,6 +15,9 @@ dependencies {
 	compileOnly "com.github.spotbugs:spotbugs-annotations:${lib_spotbugs_v}"
 	
 	implementation rootProject
+	implementation project(":sekai-meta")
+	
+	implementation "org.postgresql:postgresql:${lib_postgres_driver}"
 	
 	testImplementation "org.junit.jupiter:junit-jupiter-api:${lib_junit_v}"
 	testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${lib_junit_v}"

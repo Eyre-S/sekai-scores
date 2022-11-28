@@ -1,4 +1,4 @@
-package cc.sukazyo.sekai_scores.db.project_sekai_colorful_stage;
+package cc.sukazyo.sekai_scores.meta.project_sekai_colorful_stage;
 
 import cc.sukazyo.sekai_scores.Difficulty;
 import cc.sukazyo.sekai_scores.DifficultiesSekai;
@@ -7,7 +7,7 @@ import cc.sukazyo.sekai_scores.SongUnit;
 
 import static cc.sukazyo.sekai_scores.DifficultiesSekai.*;
 
-public class LeoNeed {
+public class LeoNeed extends SongDefinition {
 	
 	/** <a href="https://www.sekaipedia.org/wiki/Calc.">...</a> */
 	public static final Song Calc = new Song(
