@@ -6,10 +6,25 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 
 public record Difficulty(
-		@Nonnegative String id,
+		@Nonnull String id,
 		@Nonnegative int level,
-		@Nonnegative int noteCount
+		@Nonnegative int noteCount,
+		int levelPlus,
+		int levelPlus_f,
+		int levelPlus_p
 ) {
+	
+	public static final int NULL = -1;
+	
+	/**
+	 * capability constructor for v0.5
+	 */
+	public Difficulty (@Nonnull String id, @Nonnegative int level, @Nonnegative int noteCount) {
+		this(
+				id, level, noteCount,
+				NULL, NULL, NULL
+		);
+	}
 	
 	/**
 	 * @since 0.4
@@ -42,6 +57,9 @@ public record Difficulty(
 		return String.format("{%s}", toStringSimple());
 	}
 	
+	/**
+	 * outdated since v0.6: data type update
+	 */
 	@Nonnull
 	public String toStringSimple () {
 		return String.format(

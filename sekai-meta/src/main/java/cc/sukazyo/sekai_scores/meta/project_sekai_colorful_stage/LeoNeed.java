@@ -11,7 +11,7 @@ public class LeoNeed extends SongDefinition {
 	
 	/** <a href="https://www.sekaipedia.org/wiki/Calc.">...</a> */
 	public static final Song Calc = new Song(
-			243, "Calc.", SongUnit.LEO_NEED,
+			243, "Calc.", SongUnit.LIGHT_SOUND,
 			new DifficultiesSekai(
 					new Difficulty(  EASY_NAME, 7,  325),
 					new Difficulty(NORMAL_NAME,13,  464),

@@ -11,7 +11,7 @@ public class VSinger extends SongDefinition {
 	
 	/** <a href="https://www.sekaipedia.org/wiki/Donna_Ketsumatsu_ga_Onozomi_Dai%3F">...</a> */
 	public static final Song Luka_Luka_Night_Fever = new Song(
-			216, "ルカルカ★ナイトフィーバー", SongUnit.VSINGER,
+			216, "ルカルカ★ナイトフィーバー", SongUnit.PIAPRO,
 			new DifficultiesSekai(
 					new Difficulty(  EASY_NAME, 7,  218),
 					new Difficulty(NORMAL_NAME,13,  457),

@@ -11,7 +11,7 @@ public class Nightcord25ji extends SongDefinition {
 	
 	/** <a href="https://www.sekaipedia.org/wiki/Kuyamu_to_Kaite_Mirai">...</a> */
 	public static final Song Kuyamu_to_Kaite_Mirai = new Song(
-			60, "悔やむと書いてミライ", SongUnit.NIGHTCORD_25JI,
+			60, "悔やむと書いてミライ", SongUnit.SCHOOL_REFUSAL,
 			new DifficultiesSekai(
 					new Difficulty(  EASY_NAME, 8,  190),
 					new Difficulty(NORMAL_NAME,13,  440),
@@ -22,7 +22,7 @@ public class Nightcord25ji extends SongDefinition {
 	);
 	/** <a href="https://www.sekaipedia.org/wiki/Keitai_Renwa">...</a> */
 	public static final Song Keitai_Renwa = new Song(
-			61, "携帯恋話", SongUnit.NIGHTCORD_25JI,
+			61, "携帯恋話", SongUnit.SCHOOL_REFUSAL,
 			new DifficultiesSekai(
 					new Difficulty(  EASY_NAME,  8,  204),
 					new Difficulty(NORMAL_NAME, 12,  361),
@@ -33,7 +33,7 @@ public class Nightcord25ji extends SongDefinition {
 	);
 	/** <a href="https://www.sekaipedia.org/wiki/ID_Smile">...</a> */
 	public static final Song ID_Smile = new Song(
-			116, "アイディスマイル", SongUnit.NIGHTCORD_25JI,
+			116, "アイディスマイル", SongUnit.SCHOOL_REFUSAL,
 			new DifficultiesSekai(
 					new Difficulty(  EASY_NAME, 7,  263),
 					new Difficulty(NORMAL_NAME,12,  439),
@@ -44,7 +44,7 @@ public class Nightcord25ji extends SongDefinition {
 	);
 	/** <a href="https://www.sekaipedia.org/wiki/Saisei">...</a> */
 	public static final Song Saisei = new Song(
-			142, "再生", SongUnit.NIGHTCORD_25JI,
+			142, "再生", SongUnit.SCHOOL_REFUSAL,
 			new DifficultiesSekai(
 					new Difficulty(  EASY_NAME, 5,  124),
 					new Difficulty(NORMAL_NAME,11,  221),
@@ -55,7 +55,7 @@ public class Nightcord25ji extends SongDefinition {
 	);
 	/** <a href="https://www.sekaipedia.org/wiki/Kanade_Tomosu_Sora">...</a> */
 	public static final Song Kanade_Tomosu_Sora = new Song(
-			149, "カナデトモスソラ", SongUnit.NIGHTCORD_25JI,
+			149, "カナデトモスソラ", SongUnit.SCHOOL_REFUSAL,
 			new DifficultiesSekai(
 					new Difficulty(  EASY_NAME, 6,  213),
 					new Difficulty(NORMAL_NAME,11,  312),

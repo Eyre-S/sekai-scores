@@ -37,7 +37,11 @@ public class PostgresConfig {
 	}
 	
 	public String struct() {
-		return struct == null ? "default" : struct;
+		return struct;
+	}
+	
+	public String table (String table) {
+		return (struct == null ? "" : '"' + struct() + '"' + ".") + '"' + table + '"';
 	}
 	
 	public Connection connect () throws SQLException {

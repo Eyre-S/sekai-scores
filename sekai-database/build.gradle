@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+group 'cc.sukazyo'
+version projVersion
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${lib_junit_v}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${lib_junit_v}"
+}
+
+test {
+    useJUnitPlatform()
+}

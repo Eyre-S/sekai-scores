@@ -11,7 +11,7 @@ public class SekaiSpecial extends SongDefinition {
 	
 	/** <a href="https://www.sekaipedia.org/wiki/Yoru_ni_Kakeru">...</a> */
 	public static final Song Yoru_ni_Kakeru = new Song(
-			139, "夜に駆ける", SongUnit.SP,
+			139, "夜に駆ける", SongUnit._X,
 			new DifficultiesSekai(
 					new Difficulty(  EASY_NAME, 6,  182),
 					new Difficulty(NORMAL_NAME,11,  357),
@@ -22,7 +22,7 @@ public class SekaiSpecial extends SongDefinition {
 	);
 	/** <a href="https://www.sekaipedia.org/wiki/Gunjou_Sanka">...</a> */
 	public static final Song Gunjou_Sanka = new Song(
-			141, "群青讃歌", SongUnit.SP,
+			141, "群青讃歌", SongUnit._X,
 			new DifficultiesSekai(
 					new Difficulty(  EASY_NAME, 7,  199),
 					new Difficulty(NORMAL_NAME,13,  344),
@@ -33,7 +33,7 @@ public class SekaiSpecial extends SongDefinition {
 	);
 	/** <a href="https://www.sekaipedia.org/wiki/Journey">...</a> */
 	public static final Song Journey = new Song(
-			235, "Journey", SongUnit.SP,
+			235, "Journey", SongUnit._X,
 			new DifficultiesSekai(
 					new Difficulty(  EASY_NAME, 6,  199),
 					new Difficulty(NORMAL_NAME,12,  512),

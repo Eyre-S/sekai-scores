@@ -1,5 +1,7 @@
 package cc.sukazyo.sekai_cli;
 
+import cc.sukazyo.sekai_cli.db.PostgresConfig;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.File;
@@ -24,6 +26,12 @@ public class Config {
 	@Nonnull public final String db_auth_user;
 	@Nonnull public final String db_auth_pwd;
 	@Nullable public final String db_schema;
+	
+	private PostgresConfig db = null;
+	public PostgresConfig db () {
+		if (db == null) db = new PostgresConfig(this);
+		return db;
+	}
 	
 	private Config (Properties props) {
 		// user config field

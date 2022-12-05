@@ -1,4 +1,5 @@
 rootProject.name = 'sekai-scores'
 include 'sekai-cli'
 include 'sekai-meta'
+include 'sekai-database'
 

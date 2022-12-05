@@ -11,7 +11,7 @@ public class WonderlandsShowtime extends SongDefinition {
 	
 	/** <a href="https://www.sekaipedia.org/wiki/Donna_Ketsumatsu_ga_Onozomi_Dai%3F">...</a> */
 	public static final Song Donna_Ketsumatsu_ga_Onozomi_Dai = new Song(
-			290, "どんな結末がお望みだい？", SongUnit.WONDERLANDS_SHOWTIME,
+			290, "どんな結末がお望みだい？", SongUnit.THEME_PARK,
 			new DifficultiesSekai(
 					new Difficulty(  EASY_NAME, 8,  215),
 					new Difficulty(NORMAL_NAME,12,  325),

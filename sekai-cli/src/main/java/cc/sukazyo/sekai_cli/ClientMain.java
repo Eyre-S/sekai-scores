@@ -2,6 +2,7 @@ package cc.sukazyo.sekai_cli;
 
 import cc.sukazyo.sekai_cli.client.AddScore;
 import cc.sukazyo.sekai_cli.client.Configs;
+import cc.sukazyo.sekai_cli.client.Database;
 
 import java.util.List;
 
@@ -28,12 +29,19 @@ public class ClientMain {
 		
 		if ($args.size() > 0) {
 			final String i0 = $args.remove(0);
-			if (i0.equals("add")) {
-				AddScore.main($args.toArray(String[]::new));
-				$done();
-			} else if (i0.equals("config")) {
-				Configs.main($args.toArray(String[]::new));
-				$done();
+			switch (i0) {
+				case "add" -> {
+					AddScore.main($args.toArray(String[]::new));
+					$done();
+				}
+				case "config" -> {
+					Configs.main($args.toArray(String[]::new));
+					$done();
+				}
+				case "database" -> {
+					Database.main($args.toArray(String[]::new));
+					$done();
+				}
 			}
 		}
 		
