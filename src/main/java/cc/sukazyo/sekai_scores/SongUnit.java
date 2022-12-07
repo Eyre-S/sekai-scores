@@ -30,7 +30,7 @@ public enum SongUnit {
 	_X(-1, "セカイ")
 	;
 	
-	public SongUnit getBySeq(int seq) {
+	public static SongUnit getBySeq(int seq) {
 		return switch (seq) {
 			case 1 -> PIAPRO;
 			case 2 -> LIGHT_SOUND;

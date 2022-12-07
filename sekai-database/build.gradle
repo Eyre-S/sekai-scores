@@ -1,19 +1,48 @@
+import java.nio.charset.Charset
+import java.nio.charset.StandardCharsets
+
 plugins {
     id 'java'
 }
-
-group 'cc.sukazyo'
-version projVersion
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    
+    compileOnly "com.github.spotbugs:spotbugs-annotations:${lib_spotbugs_v}"
+    
     testImplementation "org.junit.jupiter:junit-jupiter-api:${lib_junit_v}"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${lib_junit_v}"
+    
 }
+
+final JavaVersion proj_java = JavaVersion.VERSION_17
+final Charset proj_source_encoding = StandardCharsets.UTF_8
+
+group 'cc.sukazyo'
+version projVersion
 
 test {
     useJUnitPlatform()
+}
+
+java {
+    
+    sourceCompatibility proj_java
+    targetCompatibility proj_java
+    
+    withSourcesJar()
+    
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = proj_source_encoding.name()
+}
+
+tasks.withType(Javadoc) {
+    options.encoding = proj_source_encoding.name()
+    options.docEncoding = proj_source_encoding.name()
+    options.charSet = proj_source_encoding.name()
 }

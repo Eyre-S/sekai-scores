@@ -1,6 +1,4 @@
-package cc.sukazyo.sekai_cli.db;
-
-import cc.sukazyo.sekai_cli.Config;
+package cc.sukazyo.sekai_db;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -12,23 +10,19 @@ public class PostgresConfig {
 	
 	@Nonnull public final String host;
 	@Nonnull public final String database;
-	@Nullable public final String struct;
+	@Nullable public final String schema;
 	@Nonnull public final String user;
 	@Nonnull public final String token;
 	
 	public PostgresConfig (
-			@Nonnull String host, @Nonnull String database, @Nullable String struct,
+			@Nonnull String host, @Nonnull String database, @Nullable String schema,
 			@Nonnull String user, @Nonnull String token
 	) {
 		this.host = host;
 		this.database = database;
-		this.struct = struct;
+		this.schema = schema;
 		this.user = user;
 		this.token = token;
-	}
-	
-	public PostgresConfig (Config global) {
-		this(global.db_host, global.db_name, global.db_schema, global.db_auth_user, global.db_auth_pwd);
 	}
 	
 	@Override
@@ -36,12 +30,12 @@ public class PostgresConfig {
 		return String.format("jdbc:postgresql://%s/%s", host, database);
 	}
 	
-	public String struct() {
-		return struct;
+	public String schema () {
+		return schema;
 	}
 	
 	public String table (String table) {
-		return (struct == null ? "" : '"' + struct() + '"' + ".") + '"' + table + '"';
+		return (schema == null ? "" : '"' + schema() + '"' + ".") + '"' + table + '"';
 	}
 	
 	public Connection connect () throws SQLException {

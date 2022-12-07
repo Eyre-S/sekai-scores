@@ -1,6 +1,6 @@
 package cc.sukazyo.sekai_cli;
 
-import cc.sukazyo.sekai_cli.db.PostgresConfig;
+import cc.sukazyo.sekai_db.PostgresConfig;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -29,7 +29,7 @@ public class Config {
 	
 	private PostgresConfig db = null;
 	public PostgresConfig db () {
-		if (db == null) db = new PostgresConfig(this);
+		if (db == null) db = new PostgresConfig(db_host, db_name, db_schema, db_auth_user, db_auth_pwd);
 		return db;
 	}
 	

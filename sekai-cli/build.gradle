@@ -16,8 +16,10 @@ dependencies {
 	
 	implementation rootProject
 	implementation project(":sekai-meta")
+	implementation project(":sekai-database")
 	
 	implementation "org.postgresql:postgresql:${lib_postgres_driver}"
+	implementation "com.google.code.gson:gson:${lib_gson}"
 	
 	testImplementation "org.junit.jupiter:junit-jupiter-api:${lib_junit_v}"
 	testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${lib_junit_v}"
