@@ -38,7 +38,11 @@ public class PostgresConfig {
 		return (schema == null ? "" : '"' + schema() + '"' + ".") + '"' + table + '"';
 	}
 	
-	public Connection connect () throws SQLException {
+	public PostgresSession connect () throws SQLException {
+		return PostgresSession.as(this);
+	}
+	
+	Connection getConnection () throws SQLException {
 		return DriverManager.getConnection(this.toString(), user, token);
 	}
 	

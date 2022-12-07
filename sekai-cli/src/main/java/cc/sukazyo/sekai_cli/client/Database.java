@@ -1,6 +1,9 @@
 package cc.sukazyo.sekai_cli.client;
 
+import cc.sukazyo.sekai_cli.ClientMain;
 import cc.sukazyo.sekai_cli.data_tool.sekai_master_db.Music;
+import cc.sukazyo.sekai_db.PostgresSession;
+import cc.sukazyo.sekai_db.table.SekaiSongs;
 import cc.sukazyo.sekai_scores.Song;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
@@ -11,6 +14,7 @@ import java.nio.charset.IllegalCharsetNameException;
 import java.nio.charset.UnsupportedCharsetException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,10 +64,27 @@ public class Database {
 				}
 				switch ($args.remove(0)) {
 					case "song" -> {
-						try {
+						try (final PostgresSession session = ClientMain.config().db().connect()) {
 							final Song[] songs = Music.toSongArray(Music.readFrom(file.toFile(), charset));
+							for (Song i : songs) {
+								_user(String.format("db_import: start insertion for song #%d (%s)", i.id(), i.name()));
+								try {
+									if (SekaiSongs.as(session).hasSong(i.id()))
+										_user(String.format("db_import: song #%d already exists, skipped.", i.id()));
+									else {
+										final int changes = SekaiSongs.as(session).insert(i);
+										_user(String.format("db_import: song #%d insert succeed: %d row updated.", i.id(), changes));
+									}
+								} catch (SQLException e) {
+									_user("db_import: song #"+i.id()+": data insert failed: " + e.getMessage());
+									_debug(e);
+								}
+							}
 						} catch (IOException | JsonIOException | JsonSyntaxException e) {
-							_user("error while parsing song file: " + e.getMessage());
+							_user("db_import: error while parsing song file: " + e.getMessage());
+							_debug(e);
+						} catch (SQLException e) {
+							_user("db_import: error while connecting to database: " + e.getMessage());
 							_debug(e);
 						}
 					}
