@@ -2,6 +2,8 @@ package cc.sukazyo.sekai_db.table;
 
 import cc.sukazyo.sekai_db.PostgresSession;
 import cc.sukazyo.sekai_db.type.SekaiDifficulties;
+import cc.sukazyo.sekai_scores.Difficulty;
+import cc.sukazyo.sekai_scores.Song;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -61,6 +63,25 @@ public class SekaiSongDifficulties {
 		else insert.setInt(6, data.flvlp);
 		if (data.plvlp == null) insert.setNull(7, Types.SMALLINT);
 		else insert.setInt(7, data.plvlp);
+		return insert.executeUpdate();
+	}
+	
+	public int insertFromSong (Difficulty difficulty, Song parent) throws SQLException {
+		final PreparedStatement insert = session.session.prepareStatement("""
+				insert into sekai_song_difficulties
+				(song_id, difficulty, level, notes, "lvl+", "flvl+", "plvl+")
+				values (?, cast(? as sekai_difficulties), ?, ?, ?, ?, ?)
+				""");
+		insert.setInt(1, parent.id());
+		insert.setString(2, difficulty.id());
+		insert.setInt(3, difficulty.level());
+		insert.setInt(4, difficulty.noteCount());
+		if (difficulty.levelPlus() == Difficulty.NULL) insert.setNull(5, Types.SMALLINT);
+		insert.setInt(5, difficulty.levelPlus());
+		if (difficulty.levelPlus_f() == Difficulty.NULL) insert.setNull(6, Types.SMALLINT);
+		insert.setInt(6, difficulty.levelPlus_f());
+		if (difficulty.levelPlus_p() == Difficulty.NULL) insert.setNull(7, Types.SMALLINT);
+		insert.setInt(7, difficulty.levelPlus_p());
 		return insert.executeUpdate();
 	}
 

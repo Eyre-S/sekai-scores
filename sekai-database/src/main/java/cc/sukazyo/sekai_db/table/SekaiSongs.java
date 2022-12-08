@@ -1,6 +1,7 @@
 package cc.sukazyo.sekai_db.table;
 
 import cc.sukazyo.sekai_db.PostgresSession;
+import cc.sukazyo.sekai_scores.Difficulty;
 import cc.sukazyo.sekai_scores.Song;
 
 import java.sql.PreparedStatement;
@@ -30,6 +31,9 @@ public class SekaiSongs {
 	}
 	
 	public int insert (Song song) throws SQLException {
+		
+		int updated = 0;
+		
 		final PreparedStatement statement = session.session.prepareStatement("""
 				insert into sekai_songs
 				(id, unit_seq, name, producer, arranger, composer, lyricist, bpm, duration, release_date, name_alias)
@@ -49,7 +53,13 @@ public class SekaiSongs {
 		if (song.releaseDate() == null) statement.setNull(10, Types.TIMESTAMP_WITH_TIMEZONE);
 		else statement.setTimestamp(10, Timestamp.from(song.releaseDate().toInstant()));
 		statement.setArray(11, session.session.createArrayOf("text", song.nameAlias()));
-		return statement.executeUpdate();
+		updated += statement.executeUpdate();
+		
+		for (Difficulty difficulty : song.difficulties().getAll())
+			updated += SekaiSongDifficulties.as(session).insertFromSong(difficulty, song);
+		
+		return updated;
+		
 	}
 	
 }
