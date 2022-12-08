@@ -52,7 +52,7 @@ public class Music {
 		);
 	}
 	
-	public static Song[] toSongArray (Music... musics) {
+	public static Song[] toSong (Music... musics) {
 		final List<Song> songs = new ArrayList<>();
 		for (Music i : musics) songs.add(i.toSong());
 		return songs.toArray(new Song[0]);

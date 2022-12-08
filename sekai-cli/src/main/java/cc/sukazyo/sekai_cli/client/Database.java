@@ -2,7 +2,9 @@ package cc.sukazyo.sekai_cli.client;
 
 import cc.sukazyo.sekai_cli.ClientMain;
 import cc.sukazyo.sekai_cli.data_tool.sekai_master_db.Music;
+import cc.sukazyo.sekai_cli.data_tool.sekai_master_db.MusicDifficulty;
 import cc.sukazyo.sekai_db.PostgresSession;
+import cc.sukazyo.sekai_db.table.SekaiSongDifficulties;
 import cc.sukazyo.sekai_db.table.SekaiSongs;
 import cc.sukazyo.sekai_scores.Song;
 import com.google.gson.JsonIOException;
@@ -65,7 +67,7 @@ public class Database {
 				switch ($args.remove(0)) {
 					case "song" -> {
 						try (final PostgresSession session = ClientMain.config().db().connect()) {
-							final Song[] songs = Music.toSongArray(Music.readFrom(file.toFile(), charset));
+							final Song[] songs = Music.toSong(Music.readFrom(file.toFile(), charset));
 							for (Song i : songs) {
 								_user(String.format("db_import: start insertion for song #%d (%s)", i.id(), i.name()));
 								try {
@@ -88,8 +90,45 @@ public class Database {
 							_debug(e);
 						}
 					}
-					case "song-difficulty" ->
-							_user("type song-difficulty: WIP");
+					case "song-difficulty" -> {
+						try (final PostgresSession session = ClientMain.config().db().connect()) {
+							final List<SekaiSongDifficulties.DatabaseStruct> difficultyList = new ArrayList<>();
+							for (MusicDifficulty source : MusicDifficulty.readFrom(file.toFile(), charset)) {
+								try { difficultyList.add(source.toDatabaseStruct()); }
+								catch (final IllegalArgumentException e) {
+									_user(String.format("""
+											db_import: song-difficulty: failed converting source data to database struct
+											  at source id #%d (song #%d, difficulty %s)
+											%s
+											""",
+											source.id, source.musicId, source.musicDifficulty,
+											e.getMessage().indent(2)
+									));
+									_debug(e);
+								}
+							}
+							difficultyList.forEach( i -> {
+								_user(String.format("db_import: start insertion for difficulty #%d.%s", i.songId(), i.difficulty()));
+								try {
+									if (SekaiSongDifficulties.as(session).contains(i.songId(), i.difficulty()))
+										_user(String.format("db_import:  #%d.%s already exists, skipped.", i.songId(), i.difficulty()));
+									else {
+										final int changes = SekaiSongDifficulties.as(session).insertDatabaseStructData(i);
+										_user(String.format("db_import: song #%d.%s insert succeed: %d row updated.", i.songId(), i.difficulty(), changes));
+									}
+								} catch (SQLException e) {
+									_user(String.format("db_import: #%d.%s: data insert failed: %s", i.songId(), i.difficulty(), e.getMessage()));
+									_debug(e);
+								}
+							});
+						} catch (IOException | JsonIOException | JsonSyntaxException e) {
+							_user("db_import: error while parsing difficulty list file: " + e.getMessage());
+							_debug(e);
+						} catch (SQLException e) {
+							_user("db_import: error while connecting to database: " + e.getMessage());
+							_debug(e);
+						}
+					}
 					default ->
 							_user("unavailable type.\ncurrently available types:\n  song\n  song-difficulty");
 				}
