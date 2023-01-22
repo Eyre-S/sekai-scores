@@ -13,6 +13,25 @@ import java.sql.Types;
 
 public class SekaiSongDifficulties {
 	
+	public static final String TABLE_DDL = """
+			create table sekai_song_difficulties
+			(
+			    song_id    integer                  not null,
+			    difficulty sekai.sekai_difficulties not null,
+			    level      smallint                 not null,
+			    notes      smallint                 not null,
+			    "lvl+"     smallint,
+			    "flvl+"    smallint,
+			    "plvl+"    smallint
+			);
+			
+			create index sekai_songs_difficulties_song_id_difficulty_name_index
+			    on sekai_song_difficulties (song_id, difficulty);
+			
+			create index sekai_songs_difficulties_notes_index
+			    on sekai_song_difficulties (notes);
+			""";
+	
 	public record DatabaseStruct (
 			int songId,
 			@Nonnull SekaiDifficulties difficulty,
@@ -27,6 +46,10 @@ public class SekaiSongDifficulties {
 	
 	private SekaiSongDifficulties (PostgresSession session) { this.session = session; }
 	public static SekaiSongDifficulties as (PostgresSession session) { return new SekaiSongDifficulties(session); }
+	
+	public int create () throws SQLException {
+		return session.session.prepareStatement(TABLE_DDL).executeUpdate();
+	}
 	
 	public boolean contains (int songId) throws SQLException {
 		final PreparedStatement check = session.session.prepareStatement("""

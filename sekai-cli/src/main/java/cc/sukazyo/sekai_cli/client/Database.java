@@ -29,6 +29,12 @@ public class Database {
 		
 		final List<String> $args = new ArrayList<>(List.of(args));
 		
+		if ($args.size() < 1) {
+			System.out.println("""
+					usage of database:
+					  import - import song/difficulty data to database
+					""");
+		}
 		final String subcommand = $args.remove(0);
 		if (subcommand.equals("import")) {
 			
